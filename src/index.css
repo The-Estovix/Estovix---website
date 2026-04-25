@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estovix — Light editorial design system. All colors HSL. */
+
+@layer base {
+  :root {
+    /* Airy white & blue editorial palette */
+    --background: 210 40% 98%;            /* very pale blue-tinted white */
+    --foreground: 220 40% 12%;            /* deep navy ink */
+
+    --surface: 210 45% 95%;
+    --surface-elevated: 0 0% 100%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 40% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 40% 12%;
+
+    /* Primary = deep navy. Accent = vivid blue. */
+    --primary: 220 40% 12%;
+    --primary-foreground: 210 40% 98%;
+
+    --accent: 217 85% 50%;                /* vivid blue */
+    --accent-foreground: 0 0% 100%;
+    --accent-soft: 213 95% 90%;           /* pale sky */
+
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 220 40% 12%;
+
+    --muted: 213 30% 91%;
+    --muted-foreground: 218 15% 40%;
+
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 213 30% 86%;
+    --input: 213 30% 86%;
+    --ring: 217 85% 50%;
+
+    /* Deep brand blue for inverted sections */
+    --brand-deep: 220 70% 18%;
+
+    --radius: 1rem;
+
+    /* Effects */
+    --gradient-accent: linear-gradient(135deg, hsl(217 85% 50%), hsl(200 90% 60%));
+    --gradient-mint: radial-gradient(ellipse 90% 70% at 50% 100%, hsl(213 95% 85%), hsl(210 40% 98%) 70%);
+    --shadow-paper: 0 1px 0 hsl(213 30% 86%), 0 30px 60px -30px hsl(220 40% 20% / 0.18);
+    --shadow-soft: 0 20px 50px -20px hsl(220 40% 20% / 0.15);
+    --shadow-pill: 0 8px 28px -8px hsl(217 50% 30% / 0.15);
+    --transition-smooth: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+    --sidebar-background: 210 40% 98%;
+    --sidebar-foreground: 220 40% 12%;
+    --sidebar-primary: 217 85% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 94%;
+    --sidebar-accent-foreground: 220 40% 12%;
+    --sidebar-border: 213 30% 86%;
+    --sidebar-ring: 217 85% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fraunces', 'Times New Roman', serif;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+}
+
+@layer utilities {
+  .font-serif-display { font-family: 'Fraunces', serif; }
+  .font-mono-display { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  .italic-serif { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; }
+
+  .shadow-paper { box-shadow: var(--shadow-paper); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-pill { box-shadow: var(--shadow-pill); }
+
+  .text-accent { color: hsl(var(--accent)); }
+  .bg-accent-soft { background-color: hsl(var(--accent-soft)); }
+  .bg-mint-wash { background-image: var(--gradient-mint); }
+
+  .dashed-rule {
+    background-image: linear-gradient(to bottom, hsl(var(--border)) 50%, transparent 0%);
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .rule {
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  .paper-texture {
+    background-image:
+      radial-gradient(hsl(220 18% 10% / 0.025) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  .underline-link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .underline-link:hover {
+    background-size: 0% 1px;
+  }
+
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+  .hover-lift:hover {
+    transform: translateY(-3px);
+  }
+}
