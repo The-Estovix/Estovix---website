@@ -9,7 +9,7 @@ const milestones = [
   {
     year: "2026",
     title: "First flagship product",
-    body: "Launched our first Application, reaching 10k active users within six months of release.",
+    body: "Launched our first Application.",
   },
 ];
 

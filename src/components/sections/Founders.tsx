@@ -37,7 +37,7 @@ const founders = [
     name: "Anuvrath Dileep A",
     role: "Co-founder & COO",
     bio: "Bridges craft and customers — making sure the right people meet the right product.",
-    initials: "IV",
+    initials: "AD",
     photo: founderAnuvrath,
     linkedin: "https://www.linkedin.com/in/anuvrathdileepa/",
     twitter: "",
@@ -114,7 +114,7 @@ export const Founders = () => {
                         <Twitter className="h-4 w-4" />
                       </a>
                       <span className="ml-auto font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
-                        Founder
+                        Estovix
                       </span>
                     </div>
               </article>

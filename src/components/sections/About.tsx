@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/extovix/Reveal";
 
 const stats = [
-  { value: "2", label: "Products shipped" },
+  { value: "2", label: "Products launching soon" },
   { value: "1", label: "Countries served" },
   { value: "98%", label: "Client retention" },
   { value: "2", label: "Years of craft" },
