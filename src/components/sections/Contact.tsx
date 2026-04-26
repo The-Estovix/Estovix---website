@@ -9,29 +9,43 @@ import { toast } from "sonner";
 export const Contact = () => {
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-
+    
     const form = e.target as HTMLFormElement;
     const data = new FormData(form);
     const name = data.get("name")?.toString().trim() || "";
     const email = data.get("email")?.toString().trim() || "";
     const message = data.get("message")?.toString().trim() || "";
 
-    const subject = encodeURIComponent("New contact request from Estovix site");
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-    const mailto = `mailto:theestovix@gmail.com?subject=${subject}&body=${body}`;
+    // Validate fields
+    if (!name || !email || !message) {
+      toast.error("Please fill in all fields");
+      return;
+    }
 
-    window.location.href = mailto;
+    setLoading(true);
 
-    setTimeout(() => {
+    try {
+      const subject = encodeURIComponent("New contact request from Estovix site");
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+      );
+      const mailto = `mailto:theestovix@gmail.com?subject=${subject}&body=${body}`;
+
+      // Open mailto link
+      window.location.href = mailto;
+
+      // Reset form and show success message
+      setTimeout(() => {
+        form.reset();
+        toast.success("Email draft opened — send it from your mail app.");
+        setLoading(false);
+      }, 500);
+    } catch (error) {
+      toast.error("Failed to open email client");
       setLoading(false);
-      form.reset();
-      toast.success("Email draft opened — send it from your mail app.");
-    }, 500);
+    }
   };
 
   return (
