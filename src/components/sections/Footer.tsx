@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+
 const cols = [
-  { title: "Studio", links: [{ label: "About", href: "#about" }, { label: "Method", href: "#process" }, { label: "Careers", href: "/careers" }] },
+  { title: "Studio", links: [{ label: "About", href: "#about" }, { label: "Method", href: "#process" }, { label: "Careers", href: "/careers", isRoute: true }] },
   { title: "Elsewhere", links: [{ label: "Twitter", href: "#" }, { label: "LinkedIn", href: "#" }, { label: "GitHub", href: "#" },{label: "Instagram", href: "#"}] },
 ];
 
@@ -28,9 +30,15 @@ export const Footer = () => {
               <ul className="space-y-2.5">
                 {c.links.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} className="text-sm text-foreground underline-link">
-                      {l.label}
-                    </a>
+                    {l.isRoute ? (
+                      <Link to={l.href} className="text-sm text-foreground underline-link">
+                        {l.label}
+                      </Link>
+                    ) : (
+                      <a href={l.href} className="text-sm text-foreground underline-link">
+                        {l.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
