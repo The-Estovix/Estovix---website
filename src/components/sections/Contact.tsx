@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import { Reveal } from "@/components/extovix/Reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,9 +10,16 @@ import { toast } from "sonner";
 export const Contact = () => {
   const [loading, setLoading] = useState(false);
 
+  // Initialize EmailJS - Replace these with your credentials from emailjs.com
+  useEffect(() => {
+    emailjs.init({
+      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+    });
+  }, []);
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     const form = e.target as HTMLFormElement;
     const data = new FormData(form);
     const name = data.get("name")?.toString().trim() || "";
@@ -27,23 +35,23 @@ export const Contact = () => {
     setLoading(true);
 
     try {
-      const subject = encodeURIComponent("New contact request from Estovix site");
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: name,
+          from_email: email,
+          message: message,
+          to_email: "theestovix@gmail.com",
+        }
       );
-      const mailto = `mailto:theestovix@gmail.com?subject=${subject}&body=${body}`;
 
-      // Open mailto link
-      window.location.href = mailto;
-
-      // Reset form and show success message
-      setTimeout(() => {
-        form.reset();
-        toast.success("Email draft opened — send it from your mail app.");
-        setLoading(false);
-      }, 500);
+      form.reset();
+      toast.success("Message sent successfully!");
+      setLoading(false);
     } catch (error) {
-      toast.error("Failed to open email client");
+      console.error("Email send error:", error);
+      toast.error("Failed to send message. Please try again.");
       setLoading(false);
     }
   };
