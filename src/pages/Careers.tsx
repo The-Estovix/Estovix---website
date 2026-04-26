@@ -20,17 +20,6 @@ export const Careers = () => {
               We're always looking for <span className="italic-serif text-accent">talented builders.</span>
             </h1>
           </Reveal>
-
-          <div className="mt-10 grid gap-12 md:grid-cols-12">
-            <Reveal className="md:col-span-7" delay={0.1}>
-              <p className="font-display text-2xl font-light leading-snug text-foreground md:text-3xl">
-                Work with a team passionate about creating software that people love to use.
-              </p>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                We believe great products come from great people. If you're interested in joining Estovix and helping us build the future, we'd love to hear from you.
-              </p>
-            </Reveal>
-          </div>
         </div>
       </section>
 
